@@ -21,10 +21,14 @@ class ListService {
   }
 
   addItem(newItemData, listID){
-    let newItem = new Item(newItemData, listID)
     let list = _store.State.lists.find(list => list.id == listID)
-    list.items.push(newItem)
+    list.items.push(newItemData)
     _store.saveState()
+  }
+
+  deleteItem(listID, itemIndex){
+    let list = _store.State.lists.find(list => list.id == listID)
+    list.
   }
 
 }

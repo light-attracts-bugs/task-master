@@ -1,11 +1,12 @@
 import ListService from "../Services/ListService.js";
+import _store from "../store.js"
 
-let _listService = new ListService();
+//let _listService = new ListService();
 
 //TODO Don't forget to render to the screen after every data change.
 function _drawLists() {
   let template = ``
-  let lists = _listService.List
+  let lists = _store.State.pizzas
   lists.forEach((list, index) => {
     template += lists.getTemplate(index)
   })
@@ -26,25 +27,25 @@ export default class ListController {
     let newList = {
       name: form.name.value
     }
-    _listService.createList(newList)
+    ListService.createList(newList)
     _drawLists()
   }
 
-  addItem(event, listIndex){
+  addItem(event, listID){
     event.preventDefault()
     let form = event.target
     let newItem = form.item.value
-    _listService.addItem(newItem, listIndex)
+    ListService.addItem(newItem, listID)
     _drawLists()
   }
 
-  deleteList(index){
-    _listService.deleteList(index)
+  deleteList(listID){
+    ListService.deleteList(listID)
     _drawLists()
   }
 
-  deleteItem(listIndex, itemIndex){
-    _listService.deleteItem(listIndex, itemIndex)
+  deleteItem(listID, itemIndex){
+    ListService.deleteItem(listID, itemIndex)
     _drawLists()
   }
 }
